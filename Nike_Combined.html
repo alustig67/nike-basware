@@ -401,8 +401,8 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--navy);color
 
 <!-- ── PAGE SWITCHER TAB BAR ── -->
 <div class="page-switcher">
-  <button class="pg-tab active" onclick="switchPage('p1')">📖 Your Invoice Story</button>
-  <button class="pg-tab" onclick="switchPage('p2')">🗺️ ILM Interactive Map</button>
+  <button class="pg-tab active" id="tab-p1" onclick="switchPage('p1')">📖 Your Invoice Story</button>
+  <button class="pg-tab" id="tab-p2" onclick="switchPage('p2')">🗺️ ILM Interactive Map</button>
 </div>
 
 <!-- ── PAGE 1 CONTENT ── -->
@@ -865,7 +865,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--navy);color
   <div class="sum-cta">
     <h3>Ready to explore the full interactive map?</h3>
     <p>Toggle between your current state and the Basware solution overlay. Hover any product to see exactly where it addresses your process — stage by stage, gap by gap.</p>
-    <button class="sum-cta-btn" onclick="window.open('https://claude.ai/public/artifacts/75909ad2-1d0a-4428-a671-fe8c03475fe2','_blank')">
+    <button class="sum-cta-btn" onclick="switchPage('p2')">
       <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0D0826" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Open the full ILM Map
     </button>
@@ -1305,7 +1305,8 @@ function switchPage(id) {
   document.querySelectorAll('.page-wrap').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.pg-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  const tabMap = {'p1':0,'p2':1};
+  document.querySelectorAll('.pg-tab')[tabMap[id]].classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
